@@ -6,7 +6,7 @@ class student
     int roll;
     student()
     {
-        name="Java";
+        name="Rahul";
         roll=35;
     }
     student(String name,int roll)
@@ -25,3 +25,4 @@ public class exe5_12
         System.out.println("Student 2: Name="+s2.name+",Roll="+s2.roll);
     }
 }
+//Observation: The program demonstrates constructor overloading in the Student class. The default constructor initializes the name and roll number with fixed values, while the parameterized constructor allows for user-provided values. In the main method, we create two Student objects using both constructors and display their details.

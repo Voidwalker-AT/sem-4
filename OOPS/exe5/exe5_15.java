@@ -5,7 +5,7 @@ class Student
     int rollno;
     Student()
     {
-        this("Java",35);
+        this("Rahul",35);
     }
     Student(String name,int rollno)
     {
@@ -23,3 +23,4 @@ public class exe5_15
         System.out.println("Student 2: Name="+s2.name+",Roll="+s2.rollno);
     }
 }
+//Observation: The program demonstrates constructor chaining in the Student class. The default constructor calls the parameterized constructor using the 'this' keyword, passing fixed values for name and roll number. When we create an object using the default constructor, it initializes the name and roll number with the values specified in the parameterized constructor. When we create an object using the parameterized constructor, it initializes the name and roll number with the user-provided values. Finally, we display the details of both students to verify that the constructor chaining works as expected.

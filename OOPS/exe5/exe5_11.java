@@ -36,3 +36,4 @@ public class exe5_11
         System.out.println("Area of triangle: "+obj.area(x,y,z));
     }
 }
+//Observation: The program defines a class Area with three overloaded methods named area() to calculate the area of a circle, rectangle, and triangle. The main method prompts the user to input the necessary dimensions for each shape, calls the appropriate area() method based on the input, and displays the calculated area for each shape.

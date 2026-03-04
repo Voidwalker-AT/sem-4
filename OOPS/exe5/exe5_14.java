@@ -24,3 +24,4 @@ public class exe5_14
         obj.display("Hello");
     }
 }
+//Observation: The program defines a class Overloading with three overloaded methods named display() that accept different data types: int, double, and String. In the main method, we create an instance of the Overloading class and call the display() method with different types of arguments (an integer, a double, and a string). The appropriate overloaded method is called based on the type of argument passed, demonstrating method overloading in Java.

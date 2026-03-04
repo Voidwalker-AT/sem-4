@@ -27,3 +27,4 @@ public class exe5_4
         obj.view();
     }
 }
+//Observation: Static methods cannot access instance variables because they belong to the class rather than any specific instance. Instance variables require an object of the class to be accessed, while static methods can be called without creating an object. Therefore, static methods can only directly access static variables and cannot reference instance variables without an object.

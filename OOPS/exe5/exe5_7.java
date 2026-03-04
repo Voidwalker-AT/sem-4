@@ -34,3 +34,4 @@ public class exe5_7
         obj2.display();
     }
 }
+//Observation: The static variable 'sv' is shared among all instances of the class 'ex'. When we modify 'sv' using one object (obj1), it changes for all objects of the class, including obj2. This is because static variables belong to the class rather than any specific instance, so they are shared across all instances. Therefore, when obj2 modifies 'sv', it overwrites the value set by obj1, and both obj1 and obj2 will reflect the latest value of 'sv'.

@@ -28,3 +28,4 @@ public class exe5_10
         System.out.println("Total students created: "+Student.totalStudents);
     }
 }
+//Observation: In this program, we have a Student class with two constructors: a default constructor and a parameterized constructor. Each time an object of the Student class is created, the static variable totalStudents is incremented. In the main method, we create three Student objects, which results in totalStudents being incremented three times. Finally, we display the total number of students created, which will output "Total students created: 3".

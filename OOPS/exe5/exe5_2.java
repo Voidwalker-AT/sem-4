@@ -35,3 +35,4 @@ public class exe5_2
         e2.display();
     }
 }
+//Observation: The program demonstrates the use of constructors to initialize object properties and display employee details using a method.

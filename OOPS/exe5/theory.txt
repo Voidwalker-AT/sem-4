@@ -1,0 +1,72 @@
+Theory Used in Exercise 5
+
+Method Overloading
+- Same method name is defined with different parameter lists (different number, type, or order of arguments).
+- Compile-time polymorphism is demonstrated through overloaded methods like:
+  calculate(...), area(...), volume(...), display(...).
+- Overload resolution is done by the compiler based on method signature.
+
+Constructor Overloading
+- Multiple constructors in the same class initialize objects in different ways.
+- Default constructor initializes with fixed/default values.
+- Parameterized constructor initializes with user-provided values.
+- Demonstrated in classes like Employee/Student style programs.
+
+Constructor Chaining
+- this(...) is used inside one constructor to call another constructor of the same class.
+- Helps avoid duplicate initialization logic.
+- Must be the first statement in the constructor.
+
+Default Constructor Concept
+- If no constructor is written, Java provides a default no-argument constructor.
+- Instance variables receive default values (e.g., int -> 0, reference -> null).
+- Once a custom constructor is defined, implicit default constructor is not provided.
+
+Static Variables
+- static variables belong to the class, not individual objects.
+- Shared memory: all objects see the same static value.
+- Updates from one object are reflected for all objects.
+- Used for class-level counters like total object count.
+
+Instance Variables
+- Instance variables belong to each object separately.
+- Each object keeps its own copy of instance state.
+- Changing one object's instance fields does not change another object's fields.
+
+Static Methods and Access Rules
+- static methods are callable using class name.
+- A static method cannot directly access non-static (instance) members.
+- Reason: static context has no this reference to a specific object.
+
+Blocks and Execution Order
+- static block executes once when class is loaded.
+- instance block executes each time an object is created, before constructor body.
+- constructor executes after instance block during object creation.
+- main() starts program execution.
+
+Method Call Ambiguity in Overloading
+- Ambiguity occurs when compiler finds multiple overloaded methods equally suitable.
+- Example case: argument list that can match two methods via numeric conversion.
+- Resolved by explicit casting or using clearly typed arguments.
+
+this Keyword
+- this.variable distinguishes instance field from parameter with same name.
+- this(...) invokes another constructor in same class.
+
+Input Handling Used
+- Scanner (nextInt, nextDouble) for numeric keyboard input.
+- BufferedReader + InputStreamReader with readLine() for text input.
+- Integer.parseInt() converts string input to int.
+
+Math Utility Functions
+- Math.sqrt() is used in geometric area computation.
+- Formula-based calculations are implemented through methods.
+
+Output Functions
+- System.out.print() and System.out.println() are used for formatted console output.
+- Values are displayed from object methods and main() to show behavior.
+
+Object Creation and Method Invocation
+- Objects are created using new.
+- Instance methods are called through object references.
+- Static members are accessed using class name or object reference (class-name access preferred).

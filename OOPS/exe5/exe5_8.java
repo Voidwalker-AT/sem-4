@@ -35,3 +35,4 @@ public class exe5_8
         System.out.println("Value of a: "+obj.a);
     }
 }
+//Observation: When the object of the Constructor class is created, the constructor is called, which in turn calls the instance method readValue(). The readValue() method prompts the user to enter a value, reads it from the console, and adds it to the instance variable 'a'. Finally, the value of 'a' is displayed in the main method.

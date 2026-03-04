@@ -23,3 +23,4 @@ class exe5_5
         System.out.println("This is the main method.");
     }
 }
+//Observation: The execution order is as follows: First, the static block is executed when the class is loaded. Then, when an object of the class is created, the instance block is executed followed by the constructor. Finally, the main method is executed. Therefore, the output will be:

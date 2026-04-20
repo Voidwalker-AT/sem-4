@@ -1,0 +1,9 @@
+[INFO] Application started
+[ERROR] Database connection failed
+[WARNING] Low memory detected
+[INFO] User login successful
+[ERROR] Invalid user credentials
+[WARNING] Cache full, clearing old data
+[INFO] File uploaded successfully
+[ERROR] Network timeout
+[WARNING] Disk space low

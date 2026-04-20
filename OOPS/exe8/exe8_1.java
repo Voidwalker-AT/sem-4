@@ -9,21 +9,16 @@ class exe8_1
 		try
 		{
 			fr=new FileReader("e:\\cllg\\sem4\\OOPS\\exe8\\source.txt");
-			System.out.println("Source file opened successfully");
-			
 			fw=new FileWriter("e:\\cllg\\sem4\\OOPS\\exe8\\destination.txt");
-			System.out.println("Destination file opened successfully");
 			
 			int ch;
 			int charCount=0;
-			System.out.println("Reading and writing data...");
 			while((ch=fr.read())!=-1)
 			{
 				fw.write(ch);
 				charCount++;
 			}
 			System.out.println("Total characters copied: "+charCount);
-			System.out.println("Data write completed successfully");
 		}
 		catch(FileNotFoundException e)
 		{
@@ -38,12 +33,10 @@ class exe8_1
 			if(fr!=null)
 			{
 				fr.close();
-				System.out.println("Source file closed");
 			}
 			if(fw!=null)
 			{
 				fw.close();
-				System.out.println("Destination file closed");
 			}
 		}
 	}

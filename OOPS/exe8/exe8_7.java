@@ -3,68 +3,98 @@ import java.io.*;
 import java.util.Scanner;
 class exe8_7
 {
+	static boolean isWordCharacter(char ch)
+	{
+		if(Character.isLetterOrDigit(ch) || ch=='_')
+		{
+			return true;
+		}
+		return false;
+	}
 	public static void main(String args[]) throws IOException
 	{
 		BufferedReader br=null;
 		FileWriter fw=null;
 		Scanner sc=new Scanner(System.in);
-		
 		try
 		{
-			// Take input
 			System.out.print("Enter the word to find: ");
-		String findWord=sc.nextLine();
-		System.out.print("Enter the word to replace with: ");
-		String replaceWord=sc.nextLine();
-		br=new BufferedReader(new FileReader("e:\\cllg\\sem4\\OOPS\\exe8\\source.txt"));
-		fw=new FileWriter("e:\\cllg\\sem4\\OOPS\\exe8\\replaced_output.txt");
-			System.out.println("Processing file...");
-			
-			String line;
-			int totalReplacements = 0;
-			
-			while((line=br.readLine()) != null)
+			String findWord=sc.nextLine();
+			System.out.print("Enter the word to replace with: ");
+			String replaceWord=sc.nextLine();
+			if(findWord.isEmpty())
 			{
-				// Find target word and replace with new word
-				String modifiedLine=line;
-				int countInLine=0;
-				
-				if(line.contains(findWord))
-				{
-					countInLine=line.split(findWord).length - 1;
-					modifiedLine=line.replaceAll(findWord, replaceWord);
-					totalReplacements+=countInLine;
-				}
-				
-				// Save to new file
-				fw.write(modifiedLine + "\n");
+				System.out.println("Enter a valid word");
+				return;
 			}
-			
-			System.out.println("Replacement completed");
-			System.out.println("Total replacements made: " + totalReplacements);
+			br=new BufferedReader(new FileReader("e:\\cllg\\sem4\\OOPS\\exe8\\source.txt"));
+			String line;
+			int totalReplacements=0;
+			StringBuilder output=new StringBuilder();
+			while((line=br.readLine())!=null)
+			{
+				StringBuilder modifiedLine=new StringBuilder();
+				int start=0;
+				int index;
+				while((index=line.indexOf(findWord,start))!=-1)
+				{
+					boolean validStart=false;
+					boolean validEnd=false;
+					if(index==0 || !isWordCharacter(line.charAt(index-1)))
+					{
+						validStart=true;
+					}
+					int end=index+findWord.length();
+					if(end==line.length() || !isWordCharacter(line.charAt(end)))
+					{
+						validEnd=true;
+					}
+					if(validStart && validEnd)
+					{
+						modifiedLine.append(line.substring(start,index));
+						modifiedLine.append(replaceWord);
+						totalReplacements++;
+						start=end;
+					}
+					else
+					{
+						modifiedLine.append(line.substring(start,end));
+						start=end;
+					}
+				}
+				modifiedLine.append(line.substring(start));
+				output.append(modifiedLine).append("\n");
+			}
+			if(totalReplacements==0)
+			{
+				System.out.println("Word not present in the file");
+				return;
+			}
+			System.out.println("Word present in the file");
+			fw=new FileWriter("e:\\cllg\\sem4\\OOPS\\exe8\\replaced_output.txt");
+			fw.write(output.toString());
+			System.out.println("Total replacements made: "+totalReplacements);
 		}
 		catch(FileNotFoundException e)
 		{
-			System.out.println("File not found: " + e.getMessage());
+			System.out.println("File not found: "+e.getMessage());
 		}
 		catch(IOException e)
 		{
-			System.out.println("IO Exception occurred: " + e.getMessage());
+			System.out.println("IO Exception occurred: "+e.getMessage());
 		}
 		finally
 		{
-			if(br != null)
+			if(br!=null)
 			{
 				br.close();
-				System.out.println("Source file closed");
 			}
-			if(fw != null)
+			if(fw!=null)
 			{
 				fw.close();
-				System.out.println("Output file closed");
 			}
 			sc.close();
 		}
 	}
 }
-//Observation: The program takes two inputs from the user - the word to find and the word to replace it with. It reads the file line by line and uses replaceAll() method to replace all occurrences of the target word with the new word. The number of replacements in each line is counted using the split() method. The modified content is written to a new file.
+//Observations:the program reads a source file line by line, checks for occurrences of the specified word, and replaces it with the new word only if it is a standalone word (not part of another word). It keeps track of the total replacements made and writes the modified content to a new file. The program also handles exceptions related to file operations and ensures resources are closed properly in the finally block.

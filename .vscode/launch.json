@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "cl1",
+      "request": "launch",
+      "mainClass": "classwork.cl1",
+      "projectName": "sem4_d553f9ca"
+    },
+    {
+      "type": "java",
       "name": "exe4f",
       "request": "launch",
       "mainClass": "exe4f",

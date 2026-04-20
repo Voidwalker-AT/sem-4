@@ -1,73 +1,109 @@
 //program to read a CSV file, extract specific columns, and write filtered data to another file
 import java.io.*;
-class exe8_11
+import java.util.Scanner;
+public class exe8_11
 {
-	public static void main(String args[]) throws IOException
+	private static final String INPUT_FILE="data.csv";
+	private static final String OUTPUT_FILE="filtered_data.csv";
+
+	public static void main(String args[])
 	{
-		BufferedReader br=null;
-		FileWriter fw=null;
-		
+		Scanner sc=new Scanner(System.in);
 		try
+		(
+			BufferedReader br=new BufferedReader(new FileReader(INPUT_FILE))
+		)
 		{
-			// Create sample CSV file
-		FileWriter csvWriter=new FileWriter("e:\\cllg\\sem4\\OOPS\\exe8\\data.csv");
-			csvWriter.write("ID,Name,Email,Country\n");
-			csvWriter.write("1,John,john@mail.com,USA\n");
-			csvWriter.write("2,Sarah,sarah@mail.com,UK\n");
-			csvWriter.write("3,Ahmed,ahmed@mail.com,UAE\n");
-			csvWriter.write("4,Maria,maria@mail.com,Spain\n");
-			csvWriter.write("5,Raj,raj@mail.com,India\n");
-			csvWriter.close();
-			
-			// Read CSV line by line
-		br=new BufferedReader(new FileReader("e:\\cllg\\sem4\\OOPS\\exe8\\data.csv"));
-		fw=new FileWriter("e:\\cllg\\sem4\\OOPS\\exe8\\filtered_data.csv");
-			System.out.println("Original CSV file data:");
-			String headerLine = br.readLine();
-			System.out.println(headerLine);
-			
-			// Extract required columns (ID, Name, Country)
-			fw.write("ID,Name,Country\n");
-			
-			String line;
-			int rowCount = 0;
-			System.out.println("\nFiltered data (ID, Name, Country):");
-			while((line = br.readLine()) != null)
+			String header=br.readLine();
+			if(header==null)
 			{
-				// Split using delimiter (comma)
-				String[] columns = line.split(",");
-				if(columns.length >= 4)
+				System.out.println("Input file is empty.");
+				return;
+			}
+			String[] headerColumns=header.split(",");
+			System.out.print("Enter number of columns to extract: ");
+			if(!sc.hasNextInt())
+			{
+				System.out.println("Invalid number of columns");
+				return;
+			}
+			int count=sc.nextInt();
+			sc.nextLine();
+			if(count<=0 || count>headerColumns.length)
+			{
+				System.out.println("Invalid number of columns");
+				return;
+			}
+			int[] selectedIndexes=new int[count];
+			String[] selectedColumns=new String[count];
+			for(int i=0;i<count;i++)
+			{
+				System.out.print("Enter column name "+(i+1)+": ");
+				String columnName=sc.nextLine();
+				int index=-1;
+				for(int j=0;j<headerColumns.length;j++)
 				{
-					// Extract and write filtered columns (columns 0, 1, 3)
-					String filteredLine = columns[0] + "," + columns[1] + "," + columns[3];
-					fw.write(filteredLine + "\n");
-					System.out.println(filteredLine);
-					rowCount++;
+					if(headerColumns[j].equalsIgnoreCase(columnName))
+					{
+						index=j;
+						selectedColumns[i]=headerColumns[j];
+						break;
+					}
+				}
+				if(index==-1)
+				{
+					System.out.println("Invalid column name");
+					return;
+				}
+				selectedIndexes[i]=index;
+			}
+			try
+			(
+				FileWriter fw=new FileWriter(OUTPUT_FILE)
+			)
+			{
+				for(int i=0;i<count;i++)
+				{
+					fw.write(selectedColumns[i]);
+					if(i<count-1)
+					{
+						fw.write(",");
+					}
+				}
+				fw.write("\n");
+				String line;
+				while((line=br.readLine())!=null)
+				{
+					String[] columns=line.split(",");
+					if(columns.length>=headerColumns.length)
+					{
+						String filteredLine="";
+						for(int i=0;i<count;i++)
+						{
+							filteredLine+=columns[selectedIndexes[i]];
+							if(i<count-1)
+							{
+								filteredLine+=",";
+							}
+						}
+						fw.write(filteredLine+"\n");
+					}
 				}
 			}
-			System.out.println("\nTotal rows processed: " + rowCount);
-			System.out.println("Filtered data written to file");
+			System.out.println("Filtered data written to "+OUTPUT_FILE);
 		}
 		catch(FileNotFoundException e)
 		{
-			System.out.println("File not found: " + e.getMessage());
+			System.out.println("File not found: "+e.getMessage());
 		}
 		catch(IOException e)
 		{
-			System.out.println("IO Exception occurred: " + e.getMessage());
+			System.out.println("IO Exception occurred: "+e.getMessage());
 		}
 		finally
 		{
-			if(br!=null)
-			{
-				br.close();
-			}
-			if(fw!=null)
-			{
-				fw.close();
-				System.out.println("Output file closed");
-			}
+			sc.close();
 		}
 	}
 }
-//Observation: The program creates a sample CSV file with multiple columns (ID, Name, Email, Country). It reads the CSV file line by line using BufferedReader. Each line is split using the comma delimiter with the split() method. Specific columns are extracted and written to a new file, filtering out unwanted columns like Email. This demonstrates CSV processing and data filtering techniques.
+//Observation: The program reads a CSV file, prompts the user to select specific columns by name, and writes the filtered data to a new CSV file. It handles various edge cases such as invalid column names and ensures proper resource management using try-with-resources for file handling and a finally block for closing the scanner. The program also includes error handling for file-related exceptions.

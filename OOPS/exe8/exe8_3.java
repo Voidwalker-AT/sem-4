@@ -6,19 +6,14 @@ class exe8_3
 	{
 		FileReader fr=null;
 		FileWriter fw=null;
-		
 		try
 		{
-			// Read file
 			fr=new FileReader("e:\\cllg\\sem4\\OOPS\\exe8\\source.txt");
 			fw=new FileWriter("e:\\cllg\\sem4\\OOPS\\exe8\\uppercase_output.txt");
-			System.out.println("Files opened successfully");
 			
-			// Check each character and convert lowercase to uppercase
 			int ch;
 			int convertCount=0;
-			System.out.println("Converting to uppercase...");
-			while((ch=fr.read()) != -1)
+			while((ch=fr.read())!=-1)
 			{
 				char c=(char)ch;
 				if(Character.isLowerCase(c))
@@ -26,31 +21,27 @@ class exe8_3
 					c=Character.toUpperCase(c);
 					convertCount++;
 				}
-				// Write to new file
 				fw.write(c);
 			}
-			System.out.println("Conversion completed");
-			System.out.println("Total characters converted: " + convertCount);
+			System.out.println("Total characters converted: "+convertCount);
 		}
 		catch(FileNotFoundException e)
 		{
-			System.out.println("File not found: " + e.getMessage());
+			System.out.println("File not found: "+e.getMessage());
 		}
 		catch(IOException e)
 		{
-			System.out.println("IO Exception occurred: " + e.getMessage());
+			System.out.println("IO Exception occurred: "+e.getMessage());
 		}
 		finally
 		{
 			if(fr!=null)
 			{
 				fr.close();
-				System.out.println("Source file closed");
 			}
 			if(fw!=null)
 			{
 				fw.close();
-				System.out.println("Output file closed");
 			}
 		}
 	}

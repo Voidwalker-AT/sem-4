@@ -1,6 +1,6 @@
 import pandas as pd
 
-df=pd.read_csv("extremely_messy_superstore_data.csv")
+df=pd.read_csv("superstore_data.csv")
 print("Initial Total Rows:",len(df))
 
 missing_counts=df.isnull().sum()
